@@ -63,11 +63,11 @@ def output_png(png_name,svg_name,width,height,background_colour=nil)
 	original_dimensions = get_svg_size(svg_name)
 	export_area = aspect_fit(width,height,original_dimensions[:width],original_dimensions[:height])
 	export_area_arg = "--export-area=#{export_area[:x0]}:#{export_area[:y0]}:#{export_area[:x1]}:#{export_area[:y1]}"
-	`#{inkscape_app} --export-background=#{background_colour} #{export_area_arg} --export-png png_name -w #{width} #{svg_name}`
+	`#{inkscape_app} --export-background=#{background_colour} #{export_area_arg} --export-png #{png_name} -w #{width} #{svg_name}`
 end
 
 # Outputs a png of the name iconX.png where X is an item from the array
-def output_square_icons(sizes=ios_icon_sizes,file_name=input_file_name,background_colour=nil)
+def output_square_icons(sizes=ios_icon_sizes,file_name=input_file_name,output_prefix='output/icon', background_colour=nil)
 	export_area_arg = ''
 	background_colour ||= '#ffffff'
 	original_dimensions = get_svg_size(file_name)
@@ -75,7 +75,7 @@ def output_square_icons(sizes=ios_icon_sizes,file_name=input_file_name,backgroun
 		export_area = aspect_fit(1,1,original_dimensions[:width],original_dimensions[:height])
 		export_area_arg = "--export-area=#{export_area[:x0]}:#{export_area[:y0]}:#{export_area[:x1]}:#{export_area[:y1]}"
 	end
-	sizes.each { |x| `#{inkscape_app} --export-background=#{background_colour} #{export_area_arg} --export-png icon#{x}.png -w #{x} #{file_name}` }
+	sizes.each { |x| `#{inkscape_app} --export-background=#{background_colour} #{export_area_arg} --export-png #{output_prefix}#{x}.png -w #{x} #{file_name}` }
 end
 
 launch_image = 'test_files/test_file.svg'
@@ -87,4 +87,4 @@ launch_image_sizes.each do |size|
 	output_png "output/launch#{width}x#{height}.png", launch_image, width, height
 end
 
-output_square_icons ios_icon_sizes, icon_image
+output_square_icons ios_icon_sizes, icon_image, 'output/icon'
