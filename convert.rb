@@ -38,7 +38,7 @@ def aspect_fit(width, height, original_width, original_height)
 	end
 	orig_aspect_ratio = original_width / original_height
 	req_aspect_ratio = width / height
-	puts "Original ratio: #{orig_aspect_ratio}, requested ration: #{req_aspect_ratio}"
+	puts "Original ratio: #{orig_aspect_ratio}, requested ratio: #{req_aspect_ratio}"
 	ret_rect = {}
 	if req_aspect_ratio < orig_aspect_ratio
 		# We are going to be height constrained
@@ -46,21 +46,37 @@ def aspect_fit(width, height, original_width, original_height)
 		ret_rect[:y1] = original_height
 		new_width = original_height / req_aspect_ratio
 		puts "New width: #{new_width}"
-		#binding.pry
-		ret_rect[:x0] = -0.5*new_width + 0.5 * original_width
-		ret_rect[:x1] = 0.5*new_width + 0.5 * original_width
+		ret_rect[:x0] = 0.5 * (original_width - new_width)
+		ret_rect[:x1] = 0.5 * (new_width + original_width)
 	else
 		# Width constrained
-		ret_rect[:error] = 'Width constrained'
+		ret_rect[:x0] = 0
+		ret_rect[:x1] = original_width
+		new_height = original_width * req_aspect_ratio
+		puts "New height: #{new_width}"
+		ret_rect[:y0] = 0.5 * (original_height - new_height)
+		ret_rect[:y1] = 0.5 * (new_height + original_height)
 	end
 	ret_rect
 end
 
-def output_square_icons(sizes=ios_icon_sizes)
+def output_png(png_name,svg_name,width,height,background_colour=nil)
+		export_area_arg = ''
+	background_colour ||= '#ffffff'
+	original_dimensions = get_svg_size(file_name)
+	export_area = aspect_fit(width,height,original_dimensions[:width],original_dimensions[:height])
+	export_area_arg = "--export-area=#{export_area[:x0]}:#{export_area[:y0]}:#{export_area[:x1]}:#{export_area[:y1]}"
+	`inkscape_app --export-background=#{background_colour} #{export_area_arg} --export-png png_name -w #{width} #{svg_name}` }
+end
+
+# Outputs a png of the name iconX.png where X is an item from the array
+def output_square_icons(sizes=ios_icon_sizes,file_name=input_file_name,background_colour=nil)
 	export_area_arg = ''
-	if original_height != original_width
-		export_area = aspect_fit()
-		export_area_arg = "--export-area=x0:y0:x1:y1"
+	background_colour ||= '#ffffff'
+	original_dimensions = get_svg_size(file_name)
+	if original_dimensions[:height] != original_dimensions[:width]
+		export_area = aspect_fit(1,1,original_dimensions[:width],original_dimensions[:height])
+		export_area_arg = "--export-area=#{export_area[:x0]}:#{export_area[:y0]}:#{export_area[:x1]}:#{export_area[:y1]}"
 	end
-	`inkscape_app --export-background=#ffffff #{export_area_arg} --export-png icon#{x}.png -w #{x} icon.svg`
+	sizes.each { |x| `inkscape_app --export-background=#{background_colour} #{export_area_arg} --export-png icon#{x}.png -w #{x} #{file_name}` }
 end
