@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require 'pry'
+
 # ruby -e '[58,120,29,40,80,76,152,1024].each { |x| 
 # 			`/Applications/Inkscape.app/Contents/Resources/bin/inkscape
 #				--export-png icon#{x}.png -w #{x} icon.svg` }'
@@ -34,8 +36,24 @@ def aspect_fit(width, height, original_width, original_height)
 	if width == original_width && height == original_height
 		return {x0: 0, y0: 0, x1: height, x2: width}
 	end
-
-			
+	orig_aspect_ratio = original_width / original_height
+	req_aspect_ratio = width / height
+	puts "Original ratio: #{orig_aspect_ratio}, requested ration: #{req_aspect_ratio}"
+	ret_rect = {}
+	if req_aspect_ratio < orig_aspect_ratio
+		# We are going to be height constrained
+		ret_rect[:y0] = 0
+		ret_rect[:y1] = original_height
+		new_width = original_height / req_aspect_ratio
+		puts "New width: #{new_width}"
+		#binding.pry
+		ret_rect[:x0] = -0.5*new_width + 0.5 * original_width
+		ret_rect[:x1] = 0.5*new_width + 0.5 * original_width
+	else
+		# Width constrained
+		ret_rect[:error] = 'Width constrained'
+	end
+	ret_rect
 end
 
 def output_square_icons(sizes=ios_icon_sizes)
