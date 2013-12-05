@@ -38,11 +38,11 @@ def aspect_fit(width, height, original_width, original_height)
 	req_aspect_ratio = width / height
 	puts "Original ratio: #{orig_aspect_ratio}, requested ratio: #{req_aspect_ratio}"
 	ret_rect = {}
-	if req_aspect_ratio < orig_aspect_ratio
+	if req_aspect_ratio > orig_aspect_ratio
 		# We are going to be height constrained
 		ret_rect[:y0] = 0
 		ret_rect[:y1] = original_height
-		new_width = original_height / req_aspect_ratio
+		new_width = original_height * req_aspect_ratio
 		puts "New width: #{new_width}"
 		ret_rect[:x0] = 0.5 * (original_width - new_width)
 		ret_rect[:x1] = 0.5 * (new_width + original_width)
@@ -50,7 +50,7 @@ def aspect_fit(width, height, original_width, original_height)
 		# Width constrained
 		ret_rect[:x0] = 0
 		ret_rect[:x1] = original_width
-		new_height = original_width * req_aspect_ratio
+		new_height = original_width / req_aspect_ratio
 		puts "New height: #{new_width}"
 		ret_rect[:y0] = 0.5 * (original_height - new_height)
 		ret_rect[:y1] = 0.5 * (new_height + original_height)
