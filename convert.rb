@@ -16,6 +16,7 @@ output_folder = 'output'
 ios_icon_sizes = [58,120,29,40,80,76,100,152,1024]
 # launch_images_sizes includes [1024, 1024] for use as the iTunes store logo.
 launch_image_sizes = [[640,960],[640,1136],[768,1024],[1536,2048],[1024,768],[2048,1536],[320,480],[768,1004],[1536,2008],[1024,748],[2048,1496],[1024,1024]]
+tick_box_sizes = [44,66,88,132]
 
 def get_svg_size(file_name)
 	widthRegex = Regexp.new '<svg[^<>]*width="([\d\.]*)"[^<>]*>'
@@ -90,3 +91,8 @@ launch_image_sizes.each do |size|
 end
 
 output_square_icons ios_icon_sizes, icon_image, 'output/icon'
+
+tick_box_files = ['tickBoxChecked','tickBox']
+
+tick_box_files.each { |f| output_square_icons tick_box_sizes, "test_files/#{f}.svg", "output/#{f}" }
+
