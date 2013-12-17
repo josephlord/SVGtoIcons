@@ -12,8 +12,10 @@ output_folder = 'output'
 
 #original_width = `#{inkscape_app} -z -C -W #{input_file_name}`
 
-ios_icon_sizes = [58,120,29,40,80,76,152,1024]
-launch_image_sizes = [[640,960],[640,1136],[768,1024],[1536,2048],[1024,768],[2048,1536],[320,480],[768,1004],[1536,2008],[1024,748],[2048,1496]]
+# 100 added for a review site that wanted an icon
+ios_icon_sizes = [58,120,29,40,80,76,100,152,1024]
+# launch_images_sizes includes [1024, 1024] for use as the iTunes store logo.
+launch_image_sizes = [[640,960],[640,1136],[768,1024],[1536,2048],[1024,768],[2048,1536],[320,480],[768,1004],[1536,2008],[1024,748],[2048,1496],[1024,1024]]
 
 def get_svg_size(file_name)
 	widthRegex = Regexp.new '<svg[^<>]*width="([\d\.]*)"[^<>]*>'
