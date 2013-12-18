@@ -100,7 +100,7 @@ end
 # Outputs a png for each array item at the requested size and with the name 'output_prefixX' where X is the size
 # The original page is aspect fitted to the square and can optionally have a background_colour set.
 # The array is of individual numbers as this is optimised for squares (aspect fit is only done once)
-def output_square_icons(sizes=ios_icon_sizes,svg_name=input_file_name,output_prefix='output/icon', background_colour=nil)
+def output_square_icons(sizes=ios_icon_sizes,svg_name=input_file_name,output_prefix='output/icon', background_colour='#ffffff')
 	export_area_arg = ''
 	background_colour ||= '#ffffff'
 	original_dimensions = get_svg_size(svg_name)
@@ -112,11 +112,11 @@ def output_square_icons(sizes=ios_icon_sizes,svg_name=input_file_name,output_pre
 end
 
 # Outputs pngs for each of the sizes in the array. Each array item can be a different shape
-def output_aspect_fit_rectangles( output_prefix='output/launch_image', svg_name='test_files/launch_image.svg', sizes=ios_launch_image_sizes)
+def output_aspect_fit_rectangles( output_prefix='output/launch_image', svg_name='test_files/launch_image.svg', sizes=ios_launch_image_sizes, background_colour='#ffffff')
 	sizes.each do |size|
 		width = size[0]
 		height = size[1]
-		output_png "#{output_prefix}#{width}x#{height}.png", svg_name, width, height
+		output_png "#{output_prefix}#{width}x#{height}.png", svg_name, width, height, background_colour
 	end
 end
 
