@@ -57,7 +57,7 @@ Array of iOS icon sizes (`[58,120,29,40,80,76,152,1024]`) including for the App 
 
 ### ios_launch_image_sizes
 
- Sizes for launch images for iPhone and iPad, retina and non-retina, landscape and portrait `[[640,960],[640,1136],[768,1024],[1536,2048],[1024,768],[2048,1536],[320,480],[768,1004],[1536,2008],[1024,748],[2048,1496]]`. 
+ Sizes for launch images for iPhone and iPad, retina and non-retina, landscape and portrait: `[[640,960], [640,1136], [768,1024], [1536,2048], [1024,768], [2048,1536], [320,480], [768,1004], [1536,2008], [1024,748], [2048,1496]]`. 
 
 ### output_square_icons(sizes=ios_icon_sizes,svg_name=input_file_name,output_prefix='output/icon', background_colour=nil)
 
@@ -99,8 +99,6 @@ Outputs pngs for each of the sizes in the array. Each array item can be an arbit
     </tr>
 
 </table>
-
-```
 
 Future Possibilities
 --------------------
