@@ -100,23 +100,23 @@ end
 # Outputs a png for each array item at the requested size and with the name 'output_prefixX' where X is the size
 # The original page is aspect fitted to the square and can optionally have a background_colour set.
 # The array is of individual numbers as this is optimised for squares (aspect fit is only done once)
-def output_square_icons(sizes=ios_icon_sizes,file_name=input_file_name,output_prefix='output/icon', background_colour=nil)
+def output_square_icons(sizes=ios_icon_sizes,svg_name=input_file_name,output_prefix='output/icon', background_colour=nil)
 	export_area_arg = ''
 	background_colour ||= '#ffffff'
-	original_dimensions = get_svg_size(file_name)
+	original_dimensions = get_svg_size(svg_name)
 	if original_dimensions[:height] != original_dimensions[:width]
 		export_area = aspect_fit(1,1,original_dimensions[:width],original_dimensions[:height])
 		export_area_arg = "--export-area=#{export_area[:x0]}:#{export_area[:y0]}:#{export_area[:x1]}:#{export_area[:y1]}"
 	end
-	sizes.each { |x| `#{inkscape_app} --export-background=#{background_colour} #{export_area_arg} --export-png #{output_prefix}#{x}.png -w #{x} #{file_name}` }
+	sizes.each { |x| `#{inkscape_app} --export-background=#{background_colour} #{export_area_arg} --export-png #{output_prefix}#{x}.png -w #{x} #{svg_name}` }
 end
 
 # Outputs pngs for each of the sizes in the array. Each array item can be a different shape
-def output_aspect_fit_rectangles( output_prefix='output/launch_image', file_name='test_files/launch_image.svg', sizes=ios_icon_sizes)
+def output_aspect_fit_rectangles( output_prefix='output/launch_image', svg_name='test_files/launch_image.svg', sizes=ios_launch_image_sizes)
 	sizes.each do |size|
 		width = size[0]
 		height = size[1]
-		output_png "#{output_prefix}#{width}x#{height}.png", file_name, width, height
+		output_png "#{output_prefix}#{width}x#{height}.png", svg_name, width, height
 	end
 end
 
