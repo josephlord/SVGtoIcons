@@ -27,7 +27,7 @@ The script is really quite simple so you shouldn't have too much trouble modifiy
 
 These are the key functions although they rely on a couple of others to do the aspect fit calculations and to retreive the initial size from the SVG file.
 
-### output_png(png_name,svg_name,width,height,background_colour=nil)
+### output_png(png_name, svg_name, width, height, background_colour=nil)
 
 Outputs a png file to the requested name with the requested width and height. This is the core function relied on by the other convienience functions.
 
@@ -57,9 +57,10 @@ Array of iOS icon sizes (`[58,120,29,40,80,76,152,1024]`) including for the App 
 
 ### ios_launch_image_sizes
 
- Sizes for launch images for iPhone and iPad, retina and non-retina, landscape and portrait: `[[640,960], [640,1136], [768,1024], [1536,2048], [1024,768], [2048,1536], [320,480], [768,1004], [1536,2008], [1024,748], [2048,1496]]`. 
+ Sizes for launch images for iPhone and iPad, retina and non-retina, landscape and portrait: `[[640,960], [640,1136], [768,1024], [1536,2048], [1024,768], [2048,1536], [320,480],
+ [768,1004], [1536,2008], [1024,748], [2048,1496]]`. 
 
-### output_square_icons(sizes=ios_icon_sizes,svg_name=input_file_name,output_prefix='output/icon', background_colour=nil)
+### output_square_icons(sizes, svg_name, output_prefix, background_colour=nil)
 
 Outputs a png for each array item in `sizes` at the requested size and with the name 'output_prefixX' where X is the size.
 
@@ -80,7 +81,7 @@ The original page is aspect fitted to the square and can optionally have a backg
     </tr>
 </table>
 
-### output_aspect_fit_rectangles( output_prefix='output/launch_image', file_name='test_files/launch_image.svg', sizes=ios_launch_image_sizes)
+### output_aspect_fit_rectangles(output_prefix, file_name, sizes)
 
 Outputs pngs for each of the sizes in the array. Each array item can be an arbitrary rectangle and the original image will be aspect fitted into the rectangle and centred.
 
