@@ -16,7 +16,7 @@ Basic Commandline Use
 
 Assuming that you have already got Inkscape installed in /Applications on a Mac you shouldn't need to change the script file at all.
 
-Just run `./convert.rb` with an SVG file for the launch image and 1024 pixel icon as `test_files/test_file.svg` and an icon file as `test_files/test_icon.svg`. It will then create launch image and icon png files in the `output` folder. The file names should clearly indicate the sizes of the output files to make it easy to insert into your Xcode project.
+Just run `./svgtoicons.rb` with an SVG file for the launch image and 1024 pixel icon as `test_files/test_file.svg` and an icon file as `test_files/test_icon.svg`. It will then create launch image and icon png files in the `output` folder. The file names should clearly indicate the sizes of the output files to make it easy to insert into your Xcode project.
 
 A regex is used to retreive the 'page' size from the SVG file, this may not be 100% reliable but worked fine with the SVG files I tested with.
 
