@@ -107,7 +107,7 @@ Future Possibilities
 
 The Inkscape requirement is a large and heavy one and up to date Inkscape is not available for OS X. The script would run far faster against the Cairo SVG libraries and could then be incorporated into a standalone application.
 
-### Inkscape mode
+### Inkscape script mode
 
 You can carry out a series of actions on a single Inkscape instance which would be much faster but I have not explored this. Let me know if you get it running this way (or even better send a Pull Request)
 
