@@ -135,7 +135,7 @@ if __FILE__ == $0
 	icon_sizes = ios_icon_sizes + [100]
 	output_square_icons ios_icon_sizes, 'test_files/test_icon.svg', 'output/icon'
 
-	# This is for the custom requirements of my app (Fast Lists - http://itunes.com/apps/fastlists )
+	# This is for the custom requirements of my app (Fast Lists - https://itunes.apple.com/app/fast-lists-checklists-for/id481282554 )
 	# Add whatever you need for your app here
 	if '-fl' == $1
 		tick_box_sizes = [44,66,88,132]
