@@ -59,7 +59,7 @@ def aspect_fit(width, height, original_width, original_height)
 	width = width.to_f
 	height = height.to_f
 	if width == original_width && height == original_height
-		return {x0: 0, y0: 0, x1: height, y1: width}
+		return {x0: 0, y0: 0, x1: width, y1: height}
 	end
 	orig_aspect_ratio = original_width / original_height
 	req_aspect_ratio = width / height
